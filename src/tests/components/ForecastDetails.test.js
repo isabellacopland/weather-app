@@ -5,9 +5,11 @@ import ForecastDetails from "../../components/ForecastDetails";
 describe("ForecastDetails", () => {
   const validProps = {
     date: 1111111,
-    maxtemperature: 22,
-    mintemperature: 12,
-    humidity: "60%",
+    temperature: {
+      max: 22,
+      min: 12,
+    },
+    humidity: 60,
     wind: {
       speed: 60,
       direction: "ne",
@@ -20,12 +22,13 @@ describe("ForecastDetails", () => {
   });
 
   it("render correct value for props", () => {
-    const { getAllByText } = render(<ForecastDetails forecast={validProps} />);
-    expect(getAllByText("forecast-details")).toHaveLength(2);
-    // expect(getByText("Thu Jan 01 1970")).toHaveClass("forecast-summary__date");
-    // expect(getByText("22°C")).toHaveClass("forecast-details__maxtemperature");
-    // expect(getByText("21°C")).toHaveClass("forecast-details__mintemperature");
-    // expect(getByText("60%")).toHaveClass("forecast-details__humidity");
-    // expect(getByText(60, "ne")).toHaveClass("forecast-details__wind");
+    const { getByText } = render(<ForecastDetails forecast={validProps} />);
+
+    expect(getByText("Thu Jan 01 1970")).toHaveClass("forecast-details__date");
+    expect(getByText("Max: 22°C")).toHaveClass("forecast-details__maxTemperature");
+    expect(getByText("Min: 12°C")).toHaveClass("forecast-details__minTemperature");
+    expect(getByText("Humidity: 60%")).toHaveClass("forecast-details__humidity");
+    expect(getByText("Speed: 60mph")).toHaveClass("forecast-details__wind_speed");
+    expect(getByText("Direction: ne")).toHaveClass("forecast-details__wind_direction");
   });
 });

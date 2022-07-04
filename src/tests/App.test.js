@@ -4,12 +4,12 @@ import App from "../components/App";
 import forecast from "../data/forecast.json";
 
 describe("App", () => {
-  test("renders App component correctly", () => {
+  it("renders App component correctly", () => {
     render(
       <App
         location={forecast.location}
         forecasts={forecast.forecasts}
-        forecast={0}
+        forecast={forecast[0]}
       />
     );
     const h1Element = screen.getByText(/Manchester, UK/i);

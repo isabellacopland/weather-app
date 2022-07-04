@@ -2,59 +2,43 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function ForecastDetails({ forecast }) {
+  const { date, humidity, temperature, wind } = forecast;
+
+  const formattedDate = new Date(date).toDateString();
+
   return (
-    <div className="forecast-details">
-      {forecast((item) => (
-        <ForecastDetails
-          key={item.date}
-          date={item.date}
-          maxtemperature={item.temperature.max}
-          mintemperature={item.temperature.min}
-          humidity={item.humidity}
-          windspeed={item.wind.speed}
-          winddirection={item.wind.direction}
-        />
-      ))}
+    <div className="forecast-details" data-testid="forecast-details">
+      <div className="forecast-details__date">{formattedDate}</div>
+      <div className="forecast-details__maxTemperature">
+        Max: {temperature.max}&deg;C
+      </div>
+      <div className="forecast-details__minTemperature">
+        Min: {temperature.min}&deg;C
+      </div>
+      <div className="forecast-details__humidity">Humidity: {humidity}%</div>
+      <div className="forecast-details__wind_speed">Speed: {wind.speed}mph</div>
+      <div className="forecast-details__wind_direction">
+        Direction: {wind.direction}
+      </div>
     </div>
   );
 }
 
-//   const { date, temperature, humidity, wind } = props;
-//   const formattedDate = new Date(date).toDateString();
-
-//   return (
-//     <div className="forecast-details" data-testid="forecast-details">
-//       <div className="forecast-details__date">{formattedDate}</div>
-//       <div className="forecast-details-__maxtemperature">
-//         {temperature.max}
-//         &deg;C
-//       </div>
-//       <div className="forecast-details__mintemperature">
-//         {temperature.min}
-//         &deg;C
-//       </div>
-//       <div className="forecast-details__humidity">{humidity}</div>
-//       <div className="forecast-details__wind">
-//         {(wind.speed, wind.direction)}
-//       </div>
-//     </div>
-//   );
-
 export default ForecastDetails;
 
 ForecastDetails.propTypes = {
-  forecast: PropTypes.objectOf(
-    PropTypes.shape({
-      date: PropTypes.object.isRequired,
-      temperature: PropTypes.shape({
-        min: PropTypes.number,
-        max: PropTypes.number,
-      }).isRequired,
-      humidity: PropTypes.number.isRequired,
-      wind: PropTypes.shape.apply({
-        speed: PropTypes.number,
-        direction: PropTypes.string,
-      }).isRequired,
-    })
-  ),
+  forecast: PropTypes.shape({
+    date: PropTypes.number,
+    temperature: PropTypes.shape({
+      min: PropTypes.number,
+      max: PropTypes.number,
+    }),
+    wind: PropTypes.shape({
+      speed: PropTypes.number,
+      direction: PropTypes.string,
+    }),
+    humidity: PropTypes.number,
+    description: PropTypes.string,
+    icon: PropTypes.string,
+  }).isRequired,
 };
