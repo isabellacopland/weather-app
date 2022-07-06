@@ -30,15 +30,13 @@ ForecastDetails.propTypes = {
   forecast: PropTypes.shape({
     date: PropTypes.number,
     temperature: PropTypes.shape({
-      min: PropTypes.number,
       max: PropTypes.number,
+      min: PropTypes.number,
     }),
     wind: PropTypes.shape({
       speed: PropTypes.number,
       direction: PropTypes.string,
     }),
     humidity: PropTypes.number,
-    description: PropTypes.string,
-    icon: PropTypes.string,
   }).isRequired,
 };
