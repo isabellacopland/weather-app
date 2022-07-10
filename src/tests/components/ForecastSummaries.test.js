@@ -41,9 +41,10 @@ describe("ForecastSummaries", () => {
 
   it("renders the correct number of ForecastSummary instances", () => {
     const { getAllByTestId } = render(
-      <ForecastSummaries 
-      forecasts={validProps.forecasts}
-      onForecastSelect={validProps.onForecastSelect} />
+      <ForecastSummaries
+        forecasts={validProps.forecasts}
+        onForecastSelect={validProps.onForecastSelect}
+      />
     );
 
     expect(getAllByTestId("forecast-summary")).toHaveLength(2);
